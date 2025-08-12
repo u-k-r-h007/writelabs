@@ -9,14 +9,14 @@ function CreateUser({ id, setId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get users array from Redux (note: state.users.users)
+  // Get users array from Redux
   const users = useSelector((state) => state.users.users);
 
   // If editing, find existing user
   const existingUser = id ? users.find((user) => user.id === id) : null;
 
-  // Form state
-  const [formData, setFormData] = useState({
+  // Empty form template
+  const emptyForm = {
     firstName: "",
     lastName: "",
     email: "",
@@ -30,12 +30,17 @@ function CreateUser({ id, setId }) {
     company: "",
     companyStart: "",
     companyEnd: "",
-  });
+  };
+
+  // Form state
+  const [formData, setFormData] = useState(emptyForm);
 
   // Populate form when editing
   useEffect(() => {
     if (existingUser) {
       setFormData(existingUser);
+    } else {
+      setFormData(emptyForm);
     }
   }, [existingUser]);
 
@@ -51,11 +56,17 @@ function CreateUser({ id, setId }) {
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (id) {
       dispatch(updateUser({ ...formData, id }));
+      setId(null); // exit edit mode
     } else {
       dispatch(addUser(formData));
     }
+
+    // Clear form fields
+    setFormData(emptyForm);
+
     navigate("/show");
   };
 

@@ -21,7 +21,7 @@ function Education({data,handleChange,setFormData,formData}) {
       <div className="modal-body px-5">
      <select class="form-select" aria-label="Default select example" name="degree" value={formData.degree}
             onChange={handleChange}>
-  <option selected>College</option>
+  <option selected>Course</option>
   <option value="B.tech">B.tech</option>
   <option value="M.tech">M.tech</option>
   <option value="MBA">MBA</option>
