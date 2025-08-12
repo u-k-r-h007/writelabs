@@ -1,0 +1,48 @@
+
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(70, 143, 239);
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.links{
+ display: flex;
+ justify-content: space-evenly;
+ padding: 0px 20px;
+ gap: 10px;
+ color: white;
+}
+
+.links > a{
+  color: white;
+  text-decoration: none;
+}
+
+.links >a:hover{
+  color: rgb(16, 35, 142);
+}
+.userData{
+display: flex;
+flex-wrap: wrap;
+  
+  
+}
+.card{
+  width: 40%;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  flex-direction: column;
+  padding: 5px;
+  
+}
+.card:hover{
+  width: 41%;
+ box-shadow: 3px 5px;
+}
