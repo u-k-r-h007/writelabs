@@ -9,13 +9,13 @@ function CreateUser({ id, setId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get users array from Redux
+
   const users = useSelector((state) => state.users.users);
 
-  // If editing, find existing user
+
   const existingUser = id ? users.find((user) => user.id === id) : null;
 
-  // Empty form template
+ 
   const emptyForm = {
     firstName: "",
     lastName: "",
@@ -32,10 +32,9 @@ function CreateUser({ id, setId }) {
     companyEnd: "",
   };
 
-  // Form state
+ 
   const [formData, setFormData] = useState(emptyForm);
 
-  // Populate form when editing
   useEffect(() => {
     if (existingUser) {
       setFormData(existingUser);
@@ -53,18 +52,18 @@ function CreateUser({ id, setId }) {
     }));
   };
 
-  // Handle form submit
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (id) {
       dispatch(updateUser({ ...formData, id }));
-      setId(null); // exit edit mode
+      setId(null); 
     } else {
       dispatch(addUser(formData));
     }
 
-    // Clear form fields
+  
     setFormData(emptyForm);
 
     navigate("/show");
@@ -88,7 +87,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-        {/* Last Name */}
+       
         <div className="mb-3">
           <label htmlFor="lname" className="form-label">Last Name</label>
           <input
@@ -102,7 +101,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-        {/* Email */}
+      
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email</label>
           <input
@@ -116,7 +115,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-        {/* DOB */}
+      
         <div className="mb-3">
           <label htmlFor="dob" className="form-label">Date of Birth</label>
           <input
@@ -129,7 +128,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-        {/* Address */}
+      
         <div className="mb-3">
           <label htmlFor="address" className="form-label">Address</label>
           <textarea
@@ -142,7 +141,7 @@ function CreateUser({ id, setId }) {
           ></textarea>
         </div>
 
-        {/* Education and Experience */}
+       
         <div className="d-flex gap-5 mb-5">
           <Education
             handleChange={handleChange}
@@ -156,7 +155,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-        {/* Submit Button */}
+      
         <button type="submit" className="btn btn-primary">
           {id ? "Update User" : "Create User"}
         </button>

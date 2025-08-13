@@ -8,7 +8,7 @@ function ShowUser({setId}) {
     return state.users;
   });
   
-  console.log(users, "ssssssssss");
+  
 
   const dispatch = useDispatch();
 
