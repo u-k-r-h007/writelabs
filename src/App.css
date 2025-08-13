@@ -33,16 +33,13 @@ flex-wrap: wrap;
   
 }
 .card{
-  width: 40%;
-  border: 2px solid black;
+  width: 30%;
+ outline: none;
   display: flex;
   justify-content: center;
   border-radius: 10px;
   flex-direction: column;
   padding: 5px;
   
-}
-.card:hover{
-  width: 41%;
- box-shadow: 3px 5px;
+  
 }

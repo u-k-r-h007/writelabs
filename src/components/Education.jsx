@@ -18,8 +18,8 @@ function Education({data,handleChange,setFormData,formData}) {
         <h1 className="modal-title fs-5" id="staticBackdropLabel">Add Education</h1>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div className="modal-body px-5">
-     <select class="form-select" aria-label="Default select example" name="degree" value={formData.degree}
+      <div className="modal-body ">
+     <select className="form-select w-100" aria-label="Default select example" name="degree" value={formData.degree}
             onChange={handleChange}>
   <option selected>Course</option>
   <option value="B.tech">B.tech</option>
@@ -29,7 +29,7 @@ function Education({data,handleChange,setFormData,formData}) {
   <option value="MCA">MCA</option>
 </select>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 px-3">
           <label for="college" class="form-label">
             College Name
           </label>
@@ -43,7 +43,7 @@ function Education({data,handleChange,setFormData,formData}) {
             placeholder="Enter your college"
           />
         </div>
-        <div className='d-flex gap-5'>
+        <div className='d-flex gap-5 px-3'>
             <div class="mb-3">
           <label for="start" class="form-label">
             Start date

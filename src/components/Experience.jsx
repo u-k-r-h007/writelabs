@@ -44,8 +44,8 @@ function Experience({setFormData,handleChange,formData}) {
 </select>
       </div>
      
-        <div className='d-flex gap-5'>
-            <div class="mb-3">
+        <div className='d-flex gap-5 px-3'>
+            <div class="mb-3 ">
           <label for="start" class="form-label">
             Start date
           </label>
@@ -59,7 +59,7 @@ function Experience({setFormData,handleChange,formData}) {
             // placeholder="Enter your first name..."
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 ">
           <label for="end" class="form-label">
             End date
           </label>

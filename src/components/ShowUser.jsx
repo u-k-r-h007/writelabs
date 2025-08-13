@@ -4,6 +4,8 @@ import { deleteUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function ShowUser({setId}) {
+
+    const [show,setShow]=useState(false)
   const { users } = useSelector((state) => {
     return state.users;
   });
@@ -24,23 +26,25 @@ setId(id)
   }
   return (
     <div>
-      <h1>Your Details</h1>
+      
 
-      <div className="userData mx-auto">
+     { users.length>0?
+    ( <>
+    <h1 className="text-center mt-5 underline text-primary fst-italic">Your Details</h1>
+     <div className="userData mx-auto">
         {users &&
           users.map((user, index) => {
             return (
-              <div key={user.id} className="card mx-auto text-center">
-                <div className="d-flex gap-3 ">
-                  <label htmlFor="">First name:</label>
-                  <h6>{user.firstName}</h6>
+              <div key={user.id} className="card  p-2 shadow mx-auto text-center">
+               <div className="px-3">
+                 <div className="d-flex gap-3 text-secondary">
+                 
+                  <h4>{user.firstName} {user.lastName}</h4>
                   </div>
-                  <div className="d-flex gap-3">
-                  <label htmlFor="">Last name:</label> <h6>{user.lastName}</h6>
-                </div>
-                <div className="d-flex gap-3">
-                  {" "}
-                  <label htmlFor="">Email:</label> <h6>{user.email}</h6>
+                 
+                <div className="d-flex gap-3 text-secondary">
+                  
+                 <h5>{user.email}</h5>
                 </div>
                 <div className="d-flex gap-3">
                   <label htmlFor="">Date of Birth:</label> <h6>{user.dob}</h6>
@@ -83,22 +87,31 @@ setId(id)
                   <label htmlFor="">Company end Date:</label>{" "}
                   <h6>{user.companyEnd}</h6>
                 </div>
-                <button
-                  class="btn btn-secondary"
+               </div>
+               <div className="d-flex justify-content-center gap-3 mt-3">
+                 <button
+                 type="button"
+                   className="btn btn-outline-primary btn-lg rounded-pill"
                   onClick={(e) => handleEdit(e, user.id)}
                 >
                   Edit User
                 </button>
                 <button
-                  class="btn btn-danger"
+                  className="btn btn-outline-danger btn-lg rounded-pill"
                   onClick={(e) => handleDelete(e, user.id)}
                 >
                   Delete User
                 </button>
+               </div>
               </div>
             );
           })}
       </div>
+    </>): (
+        <div>
+            <h1 className="text-center mt-5 underline text-danger fst-italic">No user Found</h1>
+        </div>
+      )}
     </div>
   );
 }

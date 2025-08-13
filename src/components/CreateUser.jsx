@@ -71,7 +71,7 @@ function CreateUser({ id, setId }) {
 
   return (
     <div>
-      <h1 className="mx-auto">{id ? "Edit User" : "Create User"}</h1>
+      <h1 className="text-center mt-5 underline text-primary fst-italic">{id ? "Edit User" : "Create User"}</h1>
       <form className="d-flex flex-column mx-auto w-75" onSubmit={handleSubmit}>
         {/* First Name */}
         <div className="mb-3">
@@ -84,6 +84,7 @@ function CreateUser({ id, setId }) {
             id="fname"
             name="firstName"
             placeholder="Enter your first name..."
+            required
           />
         </div>
 
@@ -98,6 +99,7 @@ function CreateUser({ id, setId }) {
             id="lname"
             name="lastName"
             placeholder="Enter your last name..."
+            required
           />
         </div>
 
@@ -112,6 +114,7 @@ function CreateUser({ id, setId }) {
             name="email"
             id="email"
             placeholder="Enter your email..."
+            required
           />
         </div>
 
