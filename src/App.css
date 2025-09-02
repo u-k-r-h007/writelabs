@@ -33,7 +33,7 @@ flex-wrap: wrap;
   
 }
 .card{
-  width: 40%;
+  width: 50%;
  outline: none;
   display: flex;
   justify-content: center;
