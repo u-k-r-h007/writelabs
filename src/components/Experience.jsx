@@ -1,89 +1,168 @@
-import React from 'react'
+import React from "react";
 
-function Experience({setFormData,handleChange,formData}) {
+function Experience({ experience, setFormData }) {
+  
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedExperience = [...experience];
+  
+    updatedExperience[index] = {
+    ...updatedExperience[index],
+    [name]: value,
+  };
+    setFormData((prev) => ({
+      ...prev,
+      experience: updatedExperience,
+    }));
+  };
+
+ 
+  const handleAddMore = () => {
+    setFormData((prev) => ({
+      ...prev,
+      experience: [
+        ...prev.experience,
+        { exp: "", company: "", companyStart: "", companyEnd: "" },
+      ],
+    }));
+  };
+
+
+  const handleRemove = (index) => {
+    const updatedExperience = experience.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      experience: updatedExperience,
+    }));
+  };
+
   return (
     <div>
-
      
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#experienceModal"
+      >
+        Add Experience
+      </button>
 
-<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-  Add Experience
-</button>
+    
+      <div
+        className="modal fade px-5"
+        id="experienceModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="experienceModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="experienceModalLabel">
+                Add Experience
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
 
+            <div className="modal-body">
+              {experience.map((exp, index) => (
+                <div key={index} className="border p-3 mb-3 rounded">
+              
+                  <div className="mb-3">
+                    <label className="form-label">Total Experience</label>
+                    <input
+                      type="text"
+                      value={exp.exp}
+                      onChange={(e) => handleChange(e, index)}
+                      name="exp"
+                      className="form-control"
+                      placeholder="Enter your experience"
+                    />
+                  </div>
 
-<div className="modal fade px-5" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div className="modal-dialog modal-dialog-centered">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h1 className="modal-title fs-5" id="staticBackdropLabel">Add Experience</h1>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
+                 
+                  <select
+                    className="form-select mb-3"
+                    name="company"
+                    value={exp.company}
+                    onChange={(e) => handleChange(e, index)}
+                  >
+                    <option value="">Company</option>
+                    <option value="google">Google</option>
+                    <option value="microsoft">Microsoft</option>
+                    <option value="dell">Dell</option>
+                    <option value="writlabs">Writ Labs</option>
+                  </select>
 
-        <div class="mb-3">
-          <label for="exp" class="form-label">
-            Total Experience:
-          </label>
-          <input
-            type="input"
-            value={formData.exp}
-            onChange={handleChange}
-            name="exp"
-            class="form-control"
-            id="exp"
-            placeholder="Enter your experience"
-          />
+                 
+                  <div className="d-flex gap-3">
+                    <div className="mb-3 w-50">
+                      <label className="form-label">Start date</label>
+                      <input
+                        type="date"
+                        value={exp.companyStart}
+                        onChange={(e) => handleChange(e, index)}
+                        name="companyStart"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="mb-3 w-50">
+                      <label className="form-label">End date</label>
+                      <input
+                        type="date"
+                        value={exp.companyEnd}
+                        onChange={(e) => handleChange(e, index)}
+                        name="companyEnd"
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+
+                 
+                  {experience.length > 1 && (
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleRemove(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              ))}
+
+              
+              <button
+                type="button"
+                className="btn btn-outline-secondary w-100"
+                onClick={handleAddMore}
+              >
+                + Add More
+              </button>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
-     <select class="form-select" aria-label="Default select example" name="company" value={formData.company}
-            onChange={handleChange}>
-  <option selected>Company</option>
-  <option value="google">Google</option>
-  <option value="microsoft">Microsoft</option>
-  <option value="dell">Dell</option>
-  <option value="writlabs">Writ Labs</option>
-</select>
-      </div>
-     
-        <div className='d-flex gap-5 px-3'>
-            <div class="mb-3 ">
-          <label for="start" class="form-label">
-            Start date
-          </label>
-          <input
-            type="date"
-            value={formData.companyStart}
-            onChange={handleChange}
-            name="companyStart"
-            class="form-control"
-            id="start"
-            // placeholder="Enter your first name..."
-          />
-        </div>
-        <div class="mb-3 ">
-          <label for="end" class="form-label">
-            End date
-          </label>
-          <input
-            type="date"
-            value={formData.companyEnd}
-            onChange={handleChange}
-             name="companyEnd"
-            class="form-control"
-            id="end"
-            // placeholder="Enter your first name..."
-          />
-        </div>
-
-        </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-       
       </div>
     </div>
-  </div>
-</div>
-    </div>
-  )
+  );
 }
 
-export default Experience
+export default Experience;

@@ -9,9 +9,7 @@ function CreateUser({ id, setId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const users = useSelector((state) => state.users.users);
-
 
   const existingUser = id ? users.find((user) => user.id === id) : null;
 
@@ -22,17 +20,14 @@ function CreateUser({ id, setId }) {
     email: "",
     dob: "",
     address: "",
-    degree: "",
-    college: "",
-    cStart: "",
-    cEnd: "",
-    exp: "",
-    company: "",
-    companyStart: "",
-    companyEnd: "",
+    education: [
+      { degree: "", college: "", cStart: "", cEnd: "" }
+    ],
+    experience: [
+      { exp: "", company: "", companyStart: "", companyEnd: "" }
+    ]
   };
 
- 
   const [formData, setFormData] = useState(emptyForm);
 
   useEffect(() => {
@@ -43,7 +38,7 @@ function CreateUser({ id, setId }) {
     }
   }, [existingUser]);
 
-  // Handle input change
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -52,28 +47,31 @@ function CreateUser({ id, setId }) {
     }));
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (id) {
       dispatch(updateUser({ ...formData, id }));
-      setId(null); 
+      setId(null);
     } else {
       dispatch(addUser(formData));
     }
 
-  
     setFormData(emptyForm);
-
     navigate("/show");
   };
 
   return (
     <div>
-      <h1 className="text-center mt-5 underline text-primary fst-italic">{id ? "Edit User" : "Create User"}</h1>
-      <form className="d-flex flex-column mx-auto w-75" onSubmit={handleSubmit}>
-        {/* First Name */}
+      <h1 className="text-center mt-5 underline text-primary fst-italic">
+        {id ? "Edit User" : "Create User"}
+      </h1>
+
+      <form
+        className="d-flex flex-column mx-auto w-75"
+        onSubmit={handleSubmit}
+      >
+       
         <div className="mb-3">
           <label htmlFor="fname" className="form-label">First Name</label>
           <input
@@ -88,7 +86,7 @@ function CreateUser({ id, setId }) {
           />
         </div>
 
-       
+      
         <div className="mb-3">
           <label htmlFor="lname" className="form-label">Last Name</label>
           <input
@@ -144,21 +142,18 @@ function CreateUser({ id, setId }) {
           ></textarea>
         </div>
 
-       
+     
         <div className="d-flex gap-5 mb-5">
           <Education
-            handleChange={handleChange}
+            education={formData.education}
             setFormData={setFormData}
-            formData={formData}
           />
           <Experience
-            handleChange={handleChange}
+            experience={formData.experience}
             setFormData={setFormData}
-            formData={formData}
           />
         </div>
 
-      
         <button type="submit" className="btn btn-primary">
           {id ? "Update User" : "Create User"}
         </button>
