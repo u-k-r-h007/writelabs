@@ -72,7 +72,7 @@ function ShowUser({ setId }) {
                               <strong>College:</strong> {edu.college}
                             </p>
                             <small className="text-muted">
-                              {edu.cStart} → {edu.cEnd}
+                              {edu.cStart} to {edu.cEnd}
                             </small>
                           </div>
                         ))
@@ -98,7 +98,7 @@ function ShowUser({ setId }) {
                               <strong>Total Exp:</strong> {exp.exp}
                             </p>
                             <small className="text-muted">
-                              {exp.companyStart} → {exp.companyEnd}
+                              {exp.companyStart} to {exp.companyEnd}
                             </small>
                           </div>
                         ))
