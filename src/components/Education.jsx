@@ -1,21 +1,26 @@
 import React from "react";
 
 function Education({ education, setFormData, data }) {
- 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedEducation = [...education];
     updatedEducation[index] = {
-    ...updatedEducation[index],
-    [name]: value,
-  };
+      ...updatedEducation[index],
+      [name]: value,
+    };
     setFormData((prev) => ({
       ...prev,
       education: updatedEducation,
     }));
   };
 
- 
+  const handleClose = () => {
+  setFormData((prev) => ({
+    ...prev,
+    education: [{ degree: "", college: "", cStart: "", cEnd: "" }],
+  }));
+};
+
   const handleAddMore = () => {
     setFormData((prev) => ({
       ...prev,
@@ -26,7 +31,6 @@ function Education({ education, setFormData, data }) {
     }));
   };
 
- 
   const handleRemove = (index) => {
     const updatedEducation = education.filter((_, i) => i !== index);
     setFormData((prev) => ({
@@ -37,7 +41,6 @@ function Education({ education, setFormData, data }) {
 
   return (
     <div>
-      
       <button
         type="button"
         className="btn btn-primary"
@@ -47,7 +50,6 @@ function Education({ education, setFormData, data }) {
         Add Education
       </button>
 
-      
       <div
         className="modal fade px-5"
         id={`${data}`}
@@ -68,13 +70,13 @@ function Education({ education, setFormData, data }) {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={handleClose}
               ></button>
             </div>
 
             <div className="modal-body">
-              {education.map((edu, index) => (
+              {education && education?.map((edu, index) => (
                 <div key={index} className="border p-3 mb-3 rounded">
-                 
                   <select
                     className="form-select mb-3"
                     name="degree"
@@ -89,7 +91,6 @@ function Education({ education, setFormData, data }) {
                     <option value="MCA">MCA</option>
                   </select>
 
-             
                   <div className="mb-3">
                     <label className="form-label">College Name</label>
                     <input
@@ -102,7 +103,6 @@ function Education({ education, setFormData, data }) {
                     />
                   </div>
 
-                  
                   <div className="d-flex gap-3">
                     <div className="mb-3 w-50">
                       <label className="form-label">Start date</label>
@@ -126,7 +126,6 @@ function Education({ education, setFormData, data }) {
                     </div>
                   </div>
 
-                 
                   {education.length > 1 && (
                     <button
                       type="button"
@@ -139,7 +138,6 @@ function Education({ education, setFormData, data }) {
                 </div>
               ))}
 
-            
               <button
                 type="button"
                 className="btn btn-outline-secondary w-100"
